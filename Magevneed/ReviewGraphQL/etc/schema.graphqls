@@ -1,0 +1,64 @@
+#category   Magevneed
+#package    Magevneed_ReviewGraphQL
+#author     dlvaishnani@gmail.coom
+#license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+
+type Query {
+    productReview (
+        product_sku: String @doc(description: "Sku of the Product"),
+        store_id: Int @doc(description: "Store id default is 0"),
+    ): productreview @resolver(class: "Magevneed\\ReviewGraphQL\\Model\\Resolver\\ProductReviewResolver") @doc(description: "The Product Review query returns information about a product review")
+    customerReview: customerreview @resolver(class: "Magevneed\\ReviewGraphQL\\Model\\Resolver\\CustomerReviewResolver") @doc (description: "The Customer Review query returns the details of review given by customer")
+}
+
+type Mutation {
+    createNewReview (input: ReviewInput!): ReviewOutput @resolver(class: "\\Magevneed\\ReviewGraphQL\\Model\\Resolver\\CreateNewProductReviewResolver")
+}
+
+input ReviewInput {
+    sku:  String @doc(description: "Product sku for review")
+    title:  String @doc(description: "The review title")
+    detail: String @doc(description: "The review detail")
+    nickname:  String @doc(description: "The review nickname")
+}
+
+type ReviewOutput @doc(description: "Review details") {
+     sku:  String @doc(description: "Product sku for review")
+     product_name: String @doc(description: "Product name")
+     title:  String @doc(description: "The review title")
+     detail: String @doc(description: "The review detail")
+     nickname:  String @doc(description: "The review nickname")
+     customer_id: Int @doc(description: "Customer Id who post review")
+     review_id: Int @doc(description: "Created new review Id")
+     created_at: String @doc(description: "The review created date")
+}
+
+type productreview @doc(description: "Review defines all active review of products") {
+    product_name: String @doc(description: "Product Name"),
+    sku : String @doc(description: "Product Sku"),
+    rating: Int @doc(description: "Product total rating"),
+    review_count: Int @doc(description: "The number of reviews for product"),
+    reviews: [ProductReviewtItem] @resolver(class: "\\Magevneed\\ReviewGraphQL\\Model\\Resolver\\ProductReviewItemsResolver") @doc(description: "An array of reviews for the product"),
+}
+
+type ProductReviewtItem {
+    created_at: String @doc(description: "Review created date"),
+    title: String @doc(description: "Review Title"),
+    detail: String @doc(description: "Review Detail"),
+    nickname: String @doc(description: "Nickname of review sender")
+}
+
+type customerreview @doc(description: "Review defines all active review of products") {
+    name: String @doc(description: "Customer Name"),
+    email: String @doc(description: "Customer Email"),
+    review_count: Int @doc(description: "The number of reviews for customer"),
+    reviews: [CustomerReviewtItem] @resolver(class: "\\Magevneed\\ReviewGraphQL\\Model\\Resolver\\CustomerReviewItemsResolver") @doc(description: "An array of reviews for the product"),
+}
+
+type CustomerReviewtItem {
+    created_at: String @doc(description: "Review created date"),
+    title: String @doc(description: "Review Title"),
+    detail: String @doc(description: "Review Detail"),
+    nickname: String @doc(description: "Nickname of review sender"),
+    product: ProductInterface @resolver(class: "\\Magevneed\\ReviewGraphQL\\Model\\Resolver\\ProductResolver")
+}
