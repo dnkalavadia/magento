@@ -17,7 +17,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 /**
  * Fetches the Review Details data according to the GraphQL schema
  */
-class CustomerReviewItemsResolver implements ResolverInterface
+class AllReviewItemsResolver implements ResolverInterface
 {
 
     /**

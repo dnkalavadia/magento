@@ -69,7 +69,7 @@ class CustomerReviewResolver implements ResolverInterface
     }
 
     /**
-     * @param int $customerId, int $storeId
+     * @param int $customerId
      * @return array
      * @throws GraphQlNoSuchEntityException
      */

@@ -9,6 +9,7 @@ type Query {
         store_id: Int @doc(description: "Store id default is 0"),
     ): productreview @resolver(class: "Magevneed\\ReviewGraphQL\\Model\\Resolver\\ProductReviewResolver") @doc(description: "The Product Review query returns information about a product review")
     customerReview: customerreview @resolver(class: "Magevneed\\ReviewGraphQL\\Model\\Resolver\\CustomerReviewResolver") @doc (description: "The Customer Review query returns the details of review given by customer")
+    allReview: allreview @resolver(class: "Magevneed\\ReviewGraphQL\\Model\\Resolver\\AllReviewResolver") @doc (description: "Gives all reviews")
 }
 
 type Mutation {
@@ -56,6 +57,19 @@ type customerreview @doc(description: "Review defines all active review of produ
 }
 
 type CustomerReviewtItem {
+    created_at: String @doc(description: "Review created date"),
+    title: String @doc(description: "Review Title"),
+    detail: String @doc(description: "Review Detail"),
+    nickname: String @doc(description: "Nickname of review sender"),
+    product: ProductInterface @resolver(class: "\\Magevneed\\ReviewGraphQL\\Model\\Resolver\\ProductResolver")
+}
+
+type allreview @doc(description: "Review defines all active review of products") {
+    review_count: Int @doc(description: "The number of reviews for customer"),
+    reviews: [AllReviewtItem] @resolver(class: "\\Magevneed\\ReviewGraphQL\\Model\\Resolver\\AllReviewItemsResolver") @doc(description: "An array of reviews for the product"),
+}
+
+type AllReviewtItem {
     created_at: String @doc(description: "Review created date"),
     title: String @doc(description: "Review Title"),
     detail: String @doc(description: "Review Detail"),

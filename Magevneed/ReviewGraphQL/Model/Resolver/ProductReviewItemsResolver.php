@@ -41,6 +41,7 @@ class ProductReviewItemsResolver implements ResolverInterface
                 'created_at' => $reviewItem->getCreatedAt(),
                 'title' => $reviewItem->getTitle(),
                 'detail' => $reviewItem->getDetail(),
+                'reviewid' => $reviewItem->getId(),
                 'nickname' => $reviewItem->getNickname()
             ];
         }
