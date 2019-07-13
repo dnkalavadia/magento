@@ -1,2 +1,4 @@
-# magento
-Repository for magento extension
+# ReviewGraphQL
+
+**ReviewGraphQL** provides type information for the GraphQl module
+to generate review
