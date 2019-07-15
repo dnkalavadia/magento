@@ -2,7 +2,9 @@
     
     "name": "magevneed/review-graph-ql",
     "description": "N/A",
-    "type": "magento2-module",          
+    "type": "magento2-module",       
+    "version":"dev-master",  
+    "minimum-stability":"dev",
     "require": {
         "php": "~7.1.3||~7.2.0",
         "magento/framework": "102.0.*",
