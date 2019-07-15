@@ -78,7 +78,7 @@ class CreateReview
         $review->unsetData('review_id');
         $review->setEntityId($review->getEntityIdByCode(\Magento\Review\Model\Review::ENTITY_PRODUCT_CODE))
             ->setEntityPkValue($productId)
-            ->setStatusId(\Magento\Review\Model\Review::STATUS_APPROVED)//By default set approved
+            ->setStatusId(\Magento\Review\Model\Review::STATUS_PENDING)
             ->setStoreId($this->storeManager->getStore()->getId())
             ->setStores([$this->storeManager->getStore()->getId()])
             ->save();
